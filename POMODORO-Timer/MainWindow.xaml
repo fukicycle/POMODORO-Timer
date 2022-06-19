@@ -16,9 +16,7 @@
         FontSize="16"
         MouseLeftButtonDown="DragMove"
         Title="POMODORO" Height="200" Width="200">
-    <!--Title="POMODORO" Height="200" Width="330">-->
     <Border CornerRadius="100" Padding="20" BorderBrush="{StaticResource Primary50}" Background="{StaticResource Primary500}">
-        <!--<Border CornerRadius="20" Padding="20" BorderBrush="{StaticResource Primary50}" Background="{StaticResource Primary100}">-->
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
@@ -26,22 +24,10 @@
                 <RowDefinition/>
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition Width="auto"/>
-                </Grid.ColumnDefinitions>
-                <StackPanel Orientation="Horizontal">
-                    <!--<TextBlock Text="POMODORO-Timer" FontSize="20" FontWeight="Bold" Foreground="{StaticResource Primary500}" VerticalAlignment="Center"/>-->
-                    <!--<Image Source="/pomodoro.png" Width="40" Height="40" Margin="10 0 0 0" />-->
-                </StackPanel>
-                <!--<Button x:Name="closeButton" Content="&#xE711;" FontFamily="Segoe MDL2 Assets" Width="30" Height="30" Style="{StaticResource FlatButtonStyle}" Grid.Column="2" VerticalAlignment="Top" Click="CloseButtonOnClick"/>-->
-                <Button x:Name="closeButton" Content="&#xE711;" FontFamily="Segoe MDL2 Assets" Width="30" Height="30" Style="{StaticResource CloseButtonStyle}" VerticalAlignment="Top" Click="CloseButtonOnClick"/>
-            </Grid>
+            <Button x:Name="closeButton" Content="&#xE711;" FontFamily="Segoe MDL2 Assets" Width="30" Height="30" Style="{StaticResource CloseButtonStyle}" VerticalAlignment="Top" Click="CloseButtonOnClick"/>
             <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center">
                 <Button x:Name="prevButton" Content="&#xE892;" FontFamily="Segoe MDL2 Assets" Width="30" Height="30" Style="{StaticResource FlatButtonStyle}" />
                 <TextBlock x:Name="sectionTextBlock" Text="Test1" FontWeight="Bold" Foreground="{StaticResource Primary50}" VerticalAlignment="Center" Margin="5 0 5 0"/>
-                <!--<TextBlock x:Name="sectionTextBlock" Text="Test1" FontWeight="Bold" Foreground="{StaticResource Primary500}" VerticalAlignment="Center" Margin="5 0 5 0"/>-->
                 <Button x:Name="nextButton" Content="&#xE893;" FontFamily="Segoe MDL2 Assets" Width="30" Height="30" Style="{StaticResource FlatButtonStyle}"/>
             </StackPanel>
             <TextBlock Grid.Row="2" HorizontalAlignment="Center" FontSize="40" Text="00:00:00" FontWeight="Bold" Foreground="{StaticResource Primary50}"/>
