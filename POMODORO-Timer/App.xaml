@@ -14,5 +14,22 @@
         <SolidColorBrush x:Key="Primary200" Color="#F8A69B"/>
         <SolidColorBrush x:Key="Primary100" Color="#FBD0CB"/>
         <SolidColorBrush x:Key="Primary50" Color="#FFFBFA"/>
+        <Style TargetType="Button" x:Key="FlatButtonStyle">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="10" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" Padding="5">
+                            <TextBlock Text="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource Primary50}" FontWeight="Bold"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Background" Value="{StaticResource Primary500}"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{StaticResource Primary300}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
     </Application.Resources>
 </Application>

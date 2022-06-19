@@ -24,5 +24,10 @@ namespace POMODORO_Timer
         {
             InitializeComponent();
         }
+
+        private void DragMove(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
+        }
     }
 }
