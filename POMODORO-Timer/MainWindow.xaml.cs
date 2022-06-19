@@ -29,5 +29,10 @@ namespace POMODORO_Timer
         {
             DragMove();
         }
+
+        private void CloseButtonOnClick(object sender, RoutedEventArgs e)
+        {
+            App.Current.Shutdown();
+        }
     }
 }
