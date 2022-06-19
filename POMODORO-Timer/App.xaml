@@ -4,6 +4,15 @@
              xmlns:local="clr-namespace:POMODORO_Timer"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <SolidColorBrush x:Key="Primary900" Color="#2B0803"/>
+        <SolidColorBrush x:Key="Primary800" Color="#5B1006"/>
+        <SolidColorBrush x:Key="Primary700" Color="#8A190A"/>
+        <SolidColorBrush x:Key="Primary600" Color="#BA220D"/>
+        <SolidColorBrush x:Key="Primary500" Color="#EA2A10"/>
+        <SolidColorBrush x:Key="Primary400" Color="#F1513C"/>
+        <SolidColorBrush x:Key="Primary300" Color="#F57C6B"/>
+        <SolidColorBrush x:Key="Primary200" Color="#F8A69B"/>
+        <SolidColorBrush x:Key="Primary100" Color="#FBD0CB"/>
+        <SolidColorBrush x:Key="Primary50" Color="#FFFBFA"/>
     </Application.Resources>
 </Application>
