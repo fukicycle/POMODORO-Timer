@@ -5,8 +5,26 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:POMODORO_Timer"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Background="Transparent"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        ResizeMode="NoResize"
+        FontSize="16"
+        Title="MainWindow" Height="200" Width="800">
+    <Border Background="{StaticResource Primary100}" CornerRadius="20" Padding="20" BorderBrush="{StaticResource Primary50}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="POMODORO-Timer" FontSize="20" FontWeight="Bold" Foreground="{StaticResource Primary500}"/>
+            <ItemsControl x:Name="timerFormItemsControl" Grid.Row="1"/>
+            <StackPanel Orientation="Horizontal" Grid.Row="2">
+                <Button x:Name="startButton" Content="Start" Width="150"/>
+                <Button x:Name="stopButton" Content="Stop" Width="150"/>
+                <Button x:Name="resetButton" Content="Reset" Width="150"/>
+            </StackPanel>
+        </Grid>
+    </Border>
 </Window>
