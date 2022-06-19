@@ -20,6 +20,7 @@ namespace POMODORO_Timer
     /// </summary>
     public partial class MainWindow : Window
     {
+        private TimerManager tm = new TimerManager();
         public MainWindow()
         {
             InitializeComponent();
@@ -33,6 +34,12 @@ namespace POMODORO_Timer
         private void CloseButtonOnClick(object sender, RoutedEventArgs e)
         {
             App.Current.Shutdown();
+        }
+
+        private void StartButtonOnClick(object sender, RoutedEventArgs e)
+        {
+            if (tm.Create(this, Step.FIRST, StepEnum.FIRST)) tm.Start();
+            stepTextBlock.Text = $"{typeof(StepEnum).GetEnumName(StepEnum.FIRST)}";
         }
     }
 }

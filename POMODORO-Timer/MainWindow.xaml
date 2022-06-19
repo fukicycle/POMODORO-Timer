@@ -27,12 +27,12 @@
             <Button x:Name="closeButton" Content="&#xE711;" FontFamily="Segoe MDL2 Assets" Width="30" Height="30" Style="{StaticResource CloseButtonStyle}" VerticalAlignment="Top" Click="CloseButtonOnClick"/>
             <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center">
                 <Button x:Name="prevButton" Content="&#xE892;" FontFamily="Segoe MDL2 Assets" Width="30" Height="30" Style="{StaticResource FlatButtonStyle}" />
-                <TextBlock x:Name="sectionTextBlock" Text="Test1" FontWeight="Bold" Foreground="{StaticResource Primary50}" VerticalAlignment="Center" Margin="5 0 5 0"/>
+                <TextBlock x:Name="stepTextBlock" Text="Ready" Width="70" TextAlignment="Center" FontWeight="Bold" Foreground="{StaticResource Primary50}" VerticalAlignment="Center" Margin="5 0 5 0"/>
                 <Button x:Name="nextButton" Content="&#xE893;" FontFamily="Segoe MDL2 Assets" Width="30" Height="30" Style="{StaticResource FlatButtonStyle}"/>
             </StackPanel>
-            <TextBlock Grid.Row="2" HorizontalAlignment="Center" FontSize="40" Text="00:00:00" FontWeight="Bold" Foreground="{StaticResource Primary50}"/>
+            <TextBlock x:Name="timerTextBlock" Grid.Row="2" HorizontalAlignment="Center" FontSize="40" Text="00:00:00" FontWeight="Bold" Foreground="{StaticResource Primary50}"/>
             <StackPanel Orientation="Horizontal" Grid.Row="3" HorizontalAlignment="Center">
-                <Button x:Name="startButton" Content="&#xE768;" FontFamily="Segoe MDL2 Assets" Width="30" Height="30" Style="{StaticResource FlatButtonStyle}" Margin="2 0 2 0"/>
+                <Button x:Name="startButton" Content="&#xE768;" FontFamily="Segoe MDL2 Assets" Width="30" Height="30" Style="{StaticResource FlatButtonStyle}" Margin="2 0 2 0" Click="StartButtonOnClick"/>
                 <Button x:Name="pauseButton" Content="&#xE769;" FontFamily="Segoe MDL2 Assets" Width="30" Height="30" Style="{StaticResource FlatButtonStyle}" />
                 <Button x:Name="resetButton" Content="&#xE72C;" FontFamily="Segoe MDL2 Assets" Width="30" Height="30" Style="{StaticResource FlatButtonStyle}" Margin="2 0 2 0"/>
             </StackPanel>
