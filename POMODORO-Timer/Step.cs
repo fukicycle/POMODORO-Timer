@@ -23,5 +23,15 @@ namespace POMODORO_Timer
         public const int BREAK = 5;
         public const int LONG_BREAK = 15;
 #endif
+        public static int GetTimeFromStepEnum(StepEnum stepEnum)
+        {
+            if (stepEnum == StepEnum.FIRST) return FIRST;
+            if (stepEnum == StepEnum.SECOND) return SECOND;
+            if (stepEnum == StepEnum.THIRD) return THIRD;
+            if (stepEnum == StepEnum.FOURTH) return FOURTH;
+            if (stepEnum == StepEnum.BREAK) return BREAK;
+            if (stepEnum == StepEnum.L_BREAK) return L_BREAK;
+            return -1;
+        }
     }
 }

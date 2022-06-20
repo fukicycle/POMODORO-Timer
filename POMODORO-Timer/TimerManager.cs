@@ -11,7 +11,7 @@ namespace POMODORO_Timer
     {
         private Timer timer;
         private int countTimer = 0;
-        private static StepEnum _stepEnum = StepEnum.READY;
+        private static StepEnum _stepEnum = StepEnum.FIRST;
         private NotifyChanged _notifyChanged = null;
         private bool isPause = false;
         private MainWindow _window;
@@ -20,17 +20,24 @@ namespace POMODORO_Timer
         {
             _window = window;
             _notifyChanged = notifyChanged;
-            timer = Create(Step.FIRST, StepEnum.FIRST);
+            Create(StepEnum.FIRST);
         }
 
-        public Timer Create(int step, StepEnum stepEnum)
+        public bool Create(StepEnum stepEnum)
         {
-            if (_stepEnum == stepEnum && isPause == false) return null;
-            if (isPause)
+            //if (_stepEnum == stepEnum && isPause == false) return false;
+            //if (isPause)
+            //{
+            //    isPause = false;
+            //    return true;
+            //}
+            if (timer != null)
             {
-                isPause = false;
-                return timer;
+                timer.Stop();
+                timer.Dispose();
+                timer = null;
             }
+            int step = Step.GetTimeFromStepEnum(stepEnum);
             countTimer = 0;
             _stepEnum = stepEnum;
             timer = new Timer(step * 60 * 1000);
@@ -46,7 +53,7 @@ namespace POMODORO_Timer
                     _notifyChanged.Finished(stepEnum);
                 }
             };
-            return timer;
+            return true;
         }
 
         public bool Start()
@@ -72,6 +79,18 @@ namespace POMODORO_Timer
             return true;
         }
 
+        public bool Prev(StepEnum stepEnum)
+        {
+            if (timer == null || timer.Enabled == true) return false;
+            return Create(stepEnum);
+        }
+
+        public bool Next(StepEnum stepEnum)
+        {
+            if (timer == null || timer.Enabled == true) return false;
+            return Create(stepEnum);
+        }
+
         public void Dispose()
         {
             if (timer != null)
@@ -80,7 +99,7 @@ namespace POMODORO_Timer
                 timer.Dispose();
                 timer = null;
                 countTimer = 0;
-                _stepEnum = StepEnum.READY;
+                _stepEnum = StepEnum.FIRST;
                 _window = null;
                 _notifyChanged = null;
                 isPause = false;

@@ -8,7 +8,6 @@ namespace POMODORO_Timer
 {
     public enum StepEnum
     {
-        READY,
         FIRST,
         SECOND,
         THIRD,

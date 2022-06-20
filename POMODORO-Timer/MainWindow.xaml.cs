@@ -51,5 +51,15 @@ namespace POMODORO_Timer
         {
             stepManager.Reset();
         }
+
+        private void PrevButtonOnClick(object sender, RoutedEventArgs e)
+        {
+            stepManager.Prev();
+        }
+
+        private void NextButtonOnClick(object sender, RoutedEventArgs e)
+        {
+            stepManager.Next();
+        }
     }
 }
