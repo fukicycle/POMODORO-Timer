@@ -25,7 +25,8 @@ namespace POMODORO_Timer
 
         public void StartPomodoro()
         {
-            timerManager.Start();
+            if(timerManager.Start())
+                _window.stepTextBlock.Text = typeof(StepEnum).GetEnumName(currentStep);
         }
 
         public void Pause()
