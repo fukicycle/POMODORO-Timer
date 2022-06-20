@@ -20,7 +20,6 @@ namespace POMODORO_Timer
     /// </summary>
     public partial class MainWindow : Window
     {
-        //private TimerManager tm = new TimerManager();
         private StepManager stepManager;
         public MainWindow()
         {
@@ -41,8 +40,11 @@ namespace POMODORO_Timer
         private void StartButtonOnClick(object sender, RoutedEventArgs e)
         {
             stepManager.StartPomodoro();
-            //if (tm.Create(this, Step.FIRST, StepEnum.FIRST)) tm.Start();
-            //stepTextBlock.Text = $"{typeof(StepEnum).GetEnumName(StepEnum.FIRST)}";
+        }
+
+        private void PauseButtonOnClick(object sender, RoutedEventArgs e)
+        {
+            stepManager.Pause();
         }
     }
 }

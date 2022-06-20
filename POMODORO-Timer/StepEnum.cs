@@ -14,6 +14,6 @@ namespace POMODORO_Timer
         THIRD,
         FOURTH,
         BREAK,
-        LONG_BREAK
+        L_BREAK
     }
 }

@@ -14,7 +14,7 @@ namespace POMODORO_Timer
         public const int THIRD = 1;
         public const int FOURTH = 1;
         public const int BREAK = 2;
-        public const int LONG_BREAK = 3;
+        public const int L_BREAK = 3;
 #else
         public const int FIRST = 25;
         public const int SECOND = 25;
