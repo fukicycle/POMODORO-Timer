@@ -14,13 +14,16 @@ namespace POMODORO_Timer
         private static StepEnum _stepEnum = StepEnum.READY;
         private NotifyChanged _notifyChanged = null;
         private bool isPause = false;
+        private MainWindow _window;
 
-        public TimerManager(NotifyChanged notifyChanged)
+        public TimerManager(NotifyChanged notifyChanged, MainWindow window)
         {
+            _window = window;
             _notifyChanged = notifyChanged;
+            timer = Create(Step.FIRST, StepEnum.FIRST);
         }
 
-        public Timer Create(MainWindow window, int step, StepEnum stepEnum)
+        public Timer Create(int step, StepEnum stepEnum)
         {
             if (_stepEnum == stepEnum && isPause == false) return null;
             if (isPause)
@@ -34,7 +37,7 @@ namespace POMODORO_Timer
             timer.Interval = 1000;
             timer.Elapsed += (s, ev) =>
             {
-                window.Dispatcher.Invoke(() => window.timerTextBlock.Text = $"{TimeSpan.FromSeconds((step * 60) - countTimer++)}");
+                _window.Dispatcher.Invoke(() => _window.timerTextBlock.Text = $"{TimeSpan.FromSeconds((step * 60) - countTimer++)}");
                 if (countTimer == (step * 60 + 1))
                 {
                     timer.Stop();
@@ -62,6 +65,13 @@ namespace POMODORO_Timer
             return true;
         }
 
+        public bool Reset()
+        {
+            if (timer == null) return true;
+            Dispose();
+            return true;
+        }
+
         public void Dispose()
         {
             if (timer != null)
@@ -71,6 +81,7 @@ namespace POMODORO_Timer
                 timer = null;
                 countTimer = 0;
                 _stepEnum = StepEnum.READY;
+                _window = null;
                 _notifyChanged = null;
                 isPause = false;
             }

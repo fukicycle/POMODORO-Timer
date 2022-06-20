@@ -16,14 +16,17 @@ namespace POMODORO_Timer
 
         public StepManager(MainWindow window)
         {
-            timerManager = new TimerManager(this);
+            timerManager = new TimerManager(this, window);
             _window = window;
-            timerManager.Create(_window, Step.FIRST, StepEnum.FIRST);
         }
 
         public void StartPomodoro()
         {
-            timerManager.Start();
+            if (!timerManager.Start())
+            {
+                timerManager = new TimerManager(this, _window);
+                timerManager.Start();
+            }
             _window.stepTextBlock.Text = typeof(StepEnum).GetEnumName(nextStep);
         }
 
@@ -31,6 +34,15 @@ namespace POMODORO_Timer
         {
             if (timerManager.Pause())
                 _window.stepTextBlock.Text = "PAUSE";
+        }
+
+        public void Reset()
+        {
+            if (timerManager.Reset())
+            {
+                _window.stepTextBlock.Text = "READY";
+                _window.timerTextBlock.Text = "00:00:00";
+            }
         }
 
         public void Finished(StepEnum stepEnum)
@@ -42,28 +54,28 @@ namespace POMODORO_Timer
                 case StepEnum.THIRD:
                     nextStep = StepEnum.BREAK;
                     prevStep = stepEnum;
-                    timerManager.Create(_window, Step.BREAK, StepEnum.BREAK);
+                    timerManager.Create(Step.BREAK, StepEnum.BREAK);
                     break;
                 case StepEnum.FOURTH:
                     nextStep = StepEnum.L_BREAK;
                     prevStep = stepEnum;
-                    timerManager.Create(_window, Step.L_BREAK, StepEnum.L_BREAK);
+                    timerManager.Create(Step.L_BREAK, StepEnum.L_BREAK);
                     break;
                 case StepEnum.BREAK:
                     if (prevStep == StepEnum.FIRST)
                     {
                         nextStep = StepEnum.SECOND;
-                        timerManager.Create(_window, Step.SECOND, StepEnum.SECOND);
+                        timerManager.Create(Step.SECOND, StepEnum.SECOND);
                     }
                     if (prevStep == StepEnum.SECOND)
                     {
                         nextStep = StepEnum.THIRD;
-                        timerManager.Create(_window, Step.THIRD, StepEnum.THIRD);
+                        timerManager.Create(Step.THIRD, StepEnum.THIRD);
                     }
                     if (prevStep == StepEnum.THIRD)
                     {
                         nextStep = StepEnum.FOURTH;
-                        timerManager.Create(_window, Step.FOURTH, StepEnum.FOURTH);
+                        timerManager.Create(Step.FOURTH, StepEnum.FOURTH);
                     }
                     break;
                 case StepEnum.L_BREAK:
