@@ -79,13 +79,8 @@ namespace POMODORO_Timer
             return true;
         }
 
-        public bool Prev(StepEnum stepEnum)
-        {
-            if (timer == null || timer.Enabled == true) return false;
-            return Create(stepEnum);
-        }
 
-        public bool Next(StepEnum stepEnum)
+        public bool MoveStep(StepEnum stepEnum)
         {
             if (timer == null || timer.Enabled == true) return false;
             return Create(stepEnum);

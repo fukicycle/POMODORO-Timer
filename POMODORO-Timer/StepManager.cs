@@ -19,6 +19,8 @@ namespace POMODORO_Timer
         {
             timerManager = new TimerManager(this, window);
             _window = window;
+            _window.stepTextBlock.Text = typeof(StepEnum).GetEnumName(StepEnum.FIRST);
+            _window.timerTextBlock.Text = TimeSpan.FromMinutes(Step.FIRST).ToString();
         }
 
         public void StartPomodoro()
@@ -44,21 +46,76 @@ namespace POMODORO_Timer
                 prevStep = StepEnum.L_BREAK;
                 currentStep = StepEnum.FIRST;
                 nextStep = StepEnum.BREAK;
-                _window.stepTextBlock.Text = "FIRST";
-                _window.timerTextBlock.Text = "00:00:00";
+                _window.stepTextBlock.Text = typeof(StepEnum).GetEnumName(StepEnum.FIRST);
+                _window.timerTextBlock.Text = TimeSpan.FromMinutes(Step.FIRST).ToString();
             }
         }
 
         public void Prev()
         {
-
+            if (currentStep == StepEnum.FIRST)
+            {
+                if (timerManager.MoveStep(StepEnum.L_BREAK))
+                {
+                    prevStep = StepEnum.FOURTH;
+                    currentStep = StepEnum.L_BREAK;
+                    nextStep = StepEnum.FIRST;
+                }
+            }
+            else if (currentStep == StepEnum.SECOND)
+            {
+                if (timerManager.MoveStep(StepEnum.BREAK))
+                {
+                    prevStep = StepEnum.FIRST;
+                    currentStep = StepEnum.BREAK;
+                    nextStep = StepEnum.SECOND;
+                }
+            }
+            else if (currentStep == StepEnum.THIRD)
+            {
+                if (timerManager.MoveStep(StepEnum.BREAK))
+                {
+                    prevStep = StepEnum.SECOND;
+                    currentStep = StepEnum.BREAK;
+                    nextStep = StepEnum.THIRD;
+                }
+            }
+            else if (currentStep == StepEnum.FOURTH)
+            {
+                if (timerManager.MoveStep(StepEnum.BREAK))
+                {
+                    prevStep = StepEnum.THIRD;
+                    currentStep = StepEnum.BREAK;
+                    nextStep = StepEnum.FOURTH;
+                }
+            }
+            else if (currentStep == StepEnum.BREAK)
+            {
+                if (timerManager.MoveStep(prevStep))
+                {
+                    currentStep = prevStep;
+                    prevStep = StepEnum.BREAK;
+                    nextStep = StepEnum.BREAK;
+                }
+            }
+            else if (currentStep == StepEnum.L_BREAK)
+            {
+                if (timerManager.MoveStep(StepEnum.FOURTH))
+                {
+                    prevStep = StepEnum.BREAK;
+                    currentStep = StepEnum.FOURTH;
+                    nextStep = StepEnum.L_BREAK;
+                }
+            }
+            _window.stepTextBlock.Text = typeof(StepEnum).GetEnumName(currentStep);
+            _window.timerTextBlock.Text = TimeSpan.FromMinutes(Step.GetTimeFromStepEnum(currentStep)).ToString();
         }
 
         public void Next()
         {
             if (currentStep == StepEnum.FIRST)
             {
-                if (timerManager.Next(StepEnum.BREAK))
+                if (timerManager.MoveStep(StepEnum.BREAK))
                 {
                     prevStep = StepEnum.FIRST;
                     currentStep = StepEnum.BREAK;
@@ -67,7 +124,7 @@ namespace POMODORO_Timer
             }
             else if (currentStep == StepEnum.SECOND)
             {
-                if (timerManager.Next(StepEnum.BREAK))
+                if (timerManager.MoveStep(StepEnum.BREAK))
                 {
                     prevStep = StepEnum.SECOND;
                     currentStep = StepEnum.BREAK;
@@ -76,7 +133,7 @@ namespace POMODORO_Timer
             }
             else if (currentStep == StepEnum.THIRD)
             {
-                if (timerManager.Next(StepEnum.BREAK))
+                if (timerManager.MoveStep(StepEnum.BREAK))
                 {
                     prevStep = StepEnum.THIRD;
                     currentStep = StepEnum.BREAK;
@@ -85,7 +142,7 @@ namespace POMODORO_Timer
             }
             else if (currentStep == StepEnum.FOURTH)
             {
-                if (timerManager.Next(StepEnum.L_BREAK))
+                if (timerManager.MoveStep(StepEnum.L_BREAK))
                 {
                     prevStep = StepEnum.FOURTH;
                     currentStep = StepEnum.L_BREAK;
@@ -94,7 +151,7 @@ namespace POMODORO_Timer
             }
             else if (currentStep == StepEnum.BREAK)
             {
-                if (timerManager.Next(nextStep))
+                if (timerManager.MoveStep(nextStep))
                 {
                     prevStep = StepEnum.BREAK;
                     currentStep = nextStep;
@@ -103,7 +160,7 @@ namespace POMODORO_Timer
             }
             else if (currentStep == StepEnum.L_BREAK)
             {
-                if (timerManager.Next(StepEnum.FIRST))
+                if (timerManager.MoveStep(StepEnum.FIRST))
                 {
                     prevStep = StepEnum.L_BREAK;
                     currentStep = StepEnum.FIRST;
@@ -111,6 +168,7 @@ namespace POMODORO_Timer
                 }
             }
             _window.stepTextBlock.Text = typeof(StepEnum).GetEnumName(currentStep);
+            _window.timerTextBlock.Text = TimeSpan.FromMinutes(Step.GetTimeFromStepEnum(currentStep)).ToString();
         }
 
         public void Finished(StepEnum stepEnum)
