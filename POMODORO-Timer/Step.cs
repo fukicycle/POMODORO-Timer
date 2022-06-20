@@ -21,7 +21,7 @@ namespace POMODORO_Timer
         public const int THIRD = 25;
         public const int FOURTH = 25;
         public const int BREAK = 5;
-        public const int LONG_BREAK = 15;
+        public const int L_BREAK = 15;
 #endif
         public static int GetTimeFromStepEnum(StepEnum stepEnum)
         {
