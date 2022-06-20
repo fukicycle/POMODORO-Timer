@@ -23,12 +23,6 @@ namespace POMODORO_Timer
 
         public bool Create(StepEnum stepEnum)
         {
-            //if (_stepEnum == stepEnum && isPause == false) return false;
-            //if (isPause)
-            //{
-            //    isPause = false;
-            //    return true;
-            //}
             if (timer != null)
             {
                 timer.Stop();
