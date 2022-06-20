@@ -11,11 +11,18 @@ namespace POMODORO_Timer
     {
         private Timer timer;
         private int countTimer = 0;
-        private static StepEnum _stepEnum = StepEnum.DEFAULT;
+        private static StepEnum _stepEnum = StepEnum.READY;
+        private NotifyChanged _notifyChanged = null;
 
-        public bool Create(MainWindow window, int step, StepEnum stepEnum)
+        public TimerManager(NotifyChanged notifyChanged)
         {
-            if (_stepEnum == stepEnum) return false;
+            _notifyChanged = notifyChanged;
+        }
+
+        public Timer Create(MainWindow window, int step, StepEnum stepEnum)
+        {
+            if (_stepEnum == stepEnum) return null;
+            countTimer = 0;
             _stepEnum = stepEnum;
             timer = new Timer(step * 60 * 1000);
             timer.Interval = 1000;
@@ -27,15 +34,10 @@ namespace POMODORO_Timer
                     timer.Stop();
                     timer.Dispose();
                     timer = null;
+                    _notifyChanged.Finished(stepEnum);
                 }
             };
-            return true;
-        }
-
-        public void Start()
-        {
-            if (timer != null)
-                timer.Start();
+            return timer;
         }
     }
 }

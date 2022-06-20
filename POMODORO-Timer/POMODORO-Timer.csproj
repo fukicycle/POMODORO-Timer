@@ -59,8 +59,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="NotifyChanged.cs" />
     <Compile Include="Step.cs" />
     <Compile Include="StepEnum.cs" />
+    <Compile Include="StepManager.cs" />
     <Compile Include="TimerManager.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

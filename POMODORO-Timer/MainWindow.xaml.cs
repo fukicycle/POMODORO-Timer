@@ -20,10 +20,12 @@ namespace POMODORO_Timer
     /// </summary>
     public partial class MainWindow : Window
     {
-        private TimerManager tm = new TimerManager();
+        //private TimerManager tm = new TimerManager();
+        private StepManager stepManager;
         public MainWindow()
         {
             InitializeComponent();
+            stepManager = new StepManager(this);
         }
 
         private void DragMove(object sender, MouseButtonEventArgs e)
@@ -38,8 +40,9 @@ namespace POMODORO_Timer
 
         private void StartButtonOnClick(object sender, RoutedEventArgs e)
         {
-            if (tm.Create(this, Step.FIRST, StepEnum.FIRST)) tm.Start();
-            stepTextBlock.Text = $"{typeof(StepEnum).GetEnumName(StepEnum.FIRST)}";
+            stepManager.StartPomodoro();
+            //if (tm.Create(this, Step.FIRST, StepEnum.FIRST)) tm.Start();
+            //stepTextBlock.Text = $"{typeof(StepEnum).GetEnumName(StepEnum.FIRST)}";
         }
     }
 }

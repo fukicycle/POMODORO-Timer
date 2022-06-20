@@ -6,14 +6,8 @@ using System.Threading.Tasks;
 
 namespace POMODORO_Timer
 {
-    public enum StepEnum
+    public interface NotifyChanged
     {
-        READY,
-        FIRST,
-        SECOND,
-        THIRD,
-        FOURTH,
-        BREAK,
-        LONG_BREAK
+        void Finished(StepEnum stepEnum);
     }
 }
