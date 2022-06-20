@@ -25,12 +25,7 @@ namespace POMODORO_Timer
 
         public void StartPomodoro()
         {
-            if (!timerManager.Start())
-            {
-                timerManager = new TimerManager(this, _window);
-                timerManager.Start();
-            }
-            _window.stepTextBlock.Text = typeof(StepEnum).GetEnumName(currentStep);
+            timerManager.Start();
         }
 
         public void Pause()
@@ -41,139 +36,149 @@ namespace POMODORO_Timer
 
         public void Reset()
         {
-            if (timerManager.Reset())
+            if (timerManager.CanMove())
             {
-                prevStep = StepEnum.L_BREAK;
-                currentStep = StepEnum.FIRST;
-                nextStep = StepEnum.BREAK;
-                _window.stepTextBlock.Text = typeof(StepEnum).GetEnumName(StepEnum.FIRST);
-                _window.timerTextBlock.Text = TimeSpan.FromMinutes(Step.FIRST).ToString();
+                if (timerManager.Reset())
+                {
+                    prevStep = StepEnum.L_BREAK;
+                    currentStep = StepEnum.FIRST;
+                    nextStep = StepEnum.BREAK;
+                    _window.stepTextBlock.Text = typeof(StepEnum).GetEnumName(StepEnum.FIRST);
+                    _window.timerTextBlock.Text = TimeSpan.FromMinutes(Step.FIRST).ToString();
+                    timerManager = new TimerManager(this, _window);
+                }
             }
         }
 
         public void Prev()
         {
-            if (currentStep == StepEnum.FIRST)
+            if (timerManager.CanMove())
             {
-                if (timerManager.MoveStep(StepEnum.L_BREAK))
+                if (currentStep == StepEnum.FIRST)
                 {
-                    prevStep = StepEnum.FOURTH;
-                    currentStep = StepEnum.L_BREAK;
-                    nextStep = StepEnum.FIRST;
+                    if (timerManager.MoveStep(StepEnum.L_BREAK))
+                    {
+                        prevStep = StepEnum.FOURTH;
+                        currentStep = StepEnum.L_BREAK;
+                        nextStep = StepEnum.FIRST;
+                    }
                 }
-            }
-            else if (currentStep == StepEnum.SECOND)
-            {
-                if (timerManager.MoveStep(StepEnum.BREAK))
+                else if (currentStep == StepEnum.SECOND)
                 {
-                    prevStep = StepEnum.FIRST;
-                    currentStep = StepEnum.BREAK;
-                    nextStep = StepEnum.SECOND;
+                    if (timerManager.MoveStep(StepEnum.BREAK))
+                    {
+                        prevStep = StepEnum.FIRST;
+                        currentStep = StepEnum.BREAK;
+                        nextStep = StepEnum.SECOND;
+                    }
                 }
-            }
-            else if (currentStep == StepEnum.THIRD)
-            {
-                if (timerManager.MoveStep(StepEnum.BREAK))
+                else if (currentStep == StepEnum.THIRD)
                 {
-                    prevStep = StepEnum.SECOND;
-                    currentStep = StepEnum.BREAK;
-                    nextStep = StepEnum.THIRD;
+                    if (timerManager.MoveStep(StepEnum.BREAK))
+                    {
+                        prevStep = StepEnum.SECOND;
+                        currentStep = StepEnum.BREAK;
+                        nextStep = StepEnum.THIRD;
+                    }
                 }
-            }
-            else if (currentStep == StepEnum.FOURTH)
-            {
-                if (timerManager.MoveStep(StepEnum.BREAK))
+                else if (currentStep == StepEnum.FOURTH)
                 {
-                    prevStep = StepEnum.THIRD;
-                    currentStep = StepEnum.BREAK;
-                    nextStep = StepEnum.FOURTH;
+                    if (timerManager.MoveStep(StepEnum.BREAK))
+                    {
+                        prevStep = StepEnum.THIRD;
+                        currentStep = StepEnum.BREAK;
+                        nextStep = StepEnum.FOURTH;
+                    }
                 }
-            }
-            else if (currentStep == StepEnum.BREAK)
-            {
-                if (timerManager.MoveStep(prevStep))
+                else if (currentStep == StepEnum.BREAK)
                 {
-                    currentStep = prevStep;
-                    prevStep = StepEnum.BREAK;
-                    nextStep = StepEnum.BREAK;
+                    if (timerManager.MoveStep(prevStep))
+                    {
+                        currentStep = prevStep;
+                        prevStep = StepEnum.BREAK;
+                        nextStep = StepEnum.BREAK;
+                    }
                 }
-            }
-            else if (currentStep == StepEnum.L_BREAK)
-            {
-                if (timerManager.MoveStep(StepEnum.FOURTH))
+                else if (currentStep == StepEnum.L_BREAK)
                 {
-                    prevStep = StepEnum.BREAK;
-                    currentStep = StepEnum.FOURTH;
-                    nextStep = StepEnum.L_BREAK;
+                    if (timerManager.MoveStep(StepEnum.FOURTH))
+                    {
+                        prevStep = StepEnum.BREAK;
+                        currentStep = StepEnum.FOURTH;
+                        nextStep = StepEnum.L_BREAK;
+                    }
                 }
+                _window.stepTextBlock.Text = typeof(StepEnum).GetEnumName(currentStep);
+                _window.timerTextBlock.Text = TimeSpan.FromMinutes(Step.GetTimeFromStepEnum(currentStep)).ToString();
             }
-            _window.stepTextBlock.Text = typeof(StepEnum).GetEnumName(currentStep);
-            _window.timerTextBlock.Text = TimeSpan.FromMinutes(Step.GetTimeFromStepEnum(currentStep)).ToString();
         }
 
         public void Next()
         {
-            if (currentStep == StepEnum.FIRST)
+            if (timerManager.CanMove())
             {
-                if (timerManager.MoveStep(StepEnum.BREAK))
+                if (currentStep == StepEnum.FIRST)
                 {
-                    prevStep = StepEnum.FIRST;
-                    currentStep = StepEnum.BREAK;
-                    nextStep = StepEnum.SECOND;
+                    if (timerManager.MoveStep(StepEnum.BREAK))
+                    {
+                        prevStep = StepEnum.FIRST;
+                        currentStep = StepEnum.BREAK;
+                        nextStep = StepEnum.SECOND;
+                    }
                 }
-            }
-            else if (currentStep == StepEnum.SECOND)
-            {
-                if (timerManager.MoveStep(StepEnum.BREAK))
+                else if (currentStep == StepEnum.SECOND)
                 {
-                    prevStep = StepEnum.SECOND;
-                    currentStep = StepEnum.BREAK;
-                    nextStep = StepEnum.THIRD;
+                    if (timerManager.MoveStep(StepEnum.BREAK))
+                    {
+                        prevStep = StepEnum.SECOND;
+                        currentStep = StepEnum.BREAK;
+                        nextStep = StepEnum.THIRD;
+                    }
                 }
-            }
-            else if (currentStep == StepEnum.THIRD)
-            {
-                if (timerManager.MoveStep(StepEnum.BREAK))
+                else if (currentStep == StepEnum.THIRD)
                 {
-                    prevStep = StepEnum.THIRD;
-                    currentStep = StepEnum.BREAK;
-                    nextStep = StepEnum.FOURTH;
+                    if (timerManager.MoveStep(StepEnum.BREAK))
+                    {
+                        prevStep = StepEnum.THIRD;
+                        currentStep = StepEnum.BREAK;
+                        nextStep = StepEnum.FOURTH;
+                    }
                 }
-            }
-            else if (currentStep == StepEnum.FOURTH)
-            {
-                if (timerManager.MoveStep(StepEnum.L_BREAK))
+                else if (currentStep == StepEnum.FOURTH)
                 {
-                    prevStep = StepEnum.FOURTH;
-                    currentStep = StepEnum.L_BREAK;
-                    nextStep = StepEnum.FIRST;
+                    if (timerManager.MoveStep(StepEnum.L_BREAK))
+                    {
+                        prevStep = StepEnum.FOURTH;
+                        currentStep = StepEnum.L_BREAK;
+                        nextStep = StepEnum.FIRST;
+                    }
                 }
-            }
-            else if (currentStep == StepEnum.BREAK)
-            {
-                if (timerManager.MoveStep(nextStep))
+                else if (currentStep == StepEnum.BREAK)
                 {
-                    prevStep = StepEnum.BREAK;
-                    currentStep = nextStep;
-                    nextStep = StepEnum.BREAK;
+                    if (timerManager.MoveStep(nextStep))
+                    {
+                        prevStep = StepEnum.BREAK;
+                        currentStep = nextStep;
+                        nextStep = StepEnum.BREAK;
+                    }
                 }
-            }
-            else if (currentStep == StepEnum.L_BREAK)
-            {
-                if (timerManager.MoveStep(StepEnum.FIRST))
+                else if (currentStep == StepEnum.L_BREAK)
                 {
-                    prevStep = StepEnum.L_BREAK;
-                    currentStep = StepEnum.FIRST;
-                    nextStep = StepEnum.BREAK;
+                    if (timerManager.MoveStep(StepEnum.FIRST))
+                    {
+                        prevStep = StepEnum.L_BREAK;
+                        currentStep = StepEnum.FIRST;
+                        nextStep = StepEnum.BREAK;
+                    }
                 }
+                _window.stepTextBlock.Text = typeof(StepEnum).GetEnumName(currentStep);
+                _window.timerTextBlock.Text = TimeSpan.FromMinutes(Step.GetTimeFromStepEnum(currentStep)).ToString();
             }
-            _window.stepTextBlock.Text = typeof(StepEnum).GetEnumName(currentStep);
-            _window.timerTextBlock.Text = TimeSpan.FromMinutes(Step.GetTimeFromStepEnum(currentStep)).ToString();
         }
 
         public void Finished(StepEnum stepEnum)
         {
-            Next();
+            _window.Dispatcher.Invoke(() => Next());
             timerManager.Start();
         }
     }

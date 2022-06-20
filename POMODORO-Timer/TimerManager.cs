@@ -10,10 +10,8 @@ namespace POMODORO_Timer
     public class TimerManager : IDisposable
     {
         private Timer timer;
-        private int countTimer = 0;
-        private static StepEnum _stepEnum = StepEnum.FIRST;
+        private int countTimer = 1;
         private NotifyChanged _notifyChanged = null;
-        private bool isPause = false;
         private MainWindow _window;
 
         public TimerManager(NotifyChanged notifyChanged, MainWindow window)
@@ -38,14 +36,13 @@ namespace POMODORO_Timer
                 timer = null;
             }
             int step = Step.GetTimeFromStepEnum(stepEnum);
-            countTimer = 0;
-            _stepEnum = stepEnum;
+            countTimer = 1;
             timer = new Timer(step * 60 * 1000);
             timer.Interval = 1000;
             timer.Elapsed += (s, ev) =>
             {
                 _window.Dispatcher.Invoke(() => _window.timerTextBlock.Text = $"{TimeSpan.FromSeconds((step * 60) - countTimer++)}");
-                if (countTimer == (step * 60 + 1))
+                if (countTimer == (step * 60 + 2))
                 {
                     timer.Stop();
                     timer.Dispose();
@@ -60,14 +57,12 @@ namespace POMODORO_Timer
         {
             if (timer  == null) return false;
             timer.Start();
-            isPause = false;
             return true;
         }
 
         public bool Pause()
         {
             if (timer == null || timer.Enabled == false) return false;
-            isPause = true;
             timer.Stop();
             return true;
         }
@@ -79,10 +74,14 @@ namespace POMODORO_Timer
             return true;
         }
 
+        public bool CanMove()
+        {
+            if (timer?.Enabled == true) return false;
+            return true;
+        }
 
         public bool MoveStep(StepEnum stepEnum)
         {
-            if (timer == null || timer.Enabled == true) return false;
             return Create(stepEnum);
         }
 
@@ -93,12 +92,10 @@ namespace POMODORO_Timer
                 timer.Stop();
                 timer.Dispose();
                 timer = null;
-                countTimer = 0;
-                _stepEnum = StepEnum.FIRST;
-                _window = null;
-                _notifyChanged = null;
-                isPause = false;
             }
+            countTimer = 1;
+            _window = null;
+            _notifyChanged = null;
         }
     }
 }
