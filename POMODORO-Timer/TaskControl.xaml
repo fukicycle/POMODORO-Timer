@@ -1,0 +1,34 @@
+﻿<UserControl x:Class="POMODORO_Timer.TaskControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:POMODORO_Timer"
+             mc:Ignorable="d" 
+             Background="Transparent"
+             Height="130"
+             FontSize="14"
+             Width="130"
+             d:DesignHeight="130" d:DesignWidth="130">
+    <Border CornerRadius="75" Background="{StaticResource Primary500}" Padding="20">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <TextBlock VerticalAlignment="Bottom" Text="{Binding Name}" TextAlignment="Center" TextWrapping="Wrap" Foreground="{StaticResource Primary50}" TextTrimming="CharacterEllipsis" />
+            <Button Grid.Row="1" FontFamily="Segoe MDL2 Assets" Click="SwitchButtonOnClick">
+                <Button.Style>
+                    <Style TargetType="Button" BasedOn="{StaticResource FlatButtonStyle}">
+                        <Setter Property="Content" Value="&#xE73E;"/>
+                        <Style.Triggers>
+                            <Trigger Property="{Binding IsCompleted,TargetNullValue=False}" Value="True">
+                                <Setter Property="Content" Value="&#xE7A7;"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+        </Grid>
+    </Border>
+</UserControl>

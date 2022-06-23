@@ -66,6 +66,9 @@
     <Compile Include="Step.cs" />
     <Compile Include="StepEnum.cs" />
     <Compile Include="StepManager.cs" />
+    <Compile Include="TaskControl.xaml.cs">
+      <DependentUpon>TaskControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TaskFileAccessManager.cs" />
     <Compile Include="TaskFileOperationManager.cs" />
     <Compile Include="Tasks.cs" />
@@ -82,6 +85,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="TaskControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
