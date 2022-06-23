@@ -72,6 +72,7 @@
     </Compile>
     <Compile Include="TaskFileAccessManager.cs" />
     <Compile Include="TaskFileOperationManager.cs" />
+    <Compile Include="TaskItem.cs" />
     <Compile Include="Tasks.cs" />
     <Compile Include="TaskViewWindow.xaml.cs">
       <DependentUpon>TaskViewWindow.xaml</DependentUpon>

@@ -20,16 +20,17 @@ namespace POMODORO_Timer
     public partial class TaskViewWindow : Window
     {
         private Stem stem;
-        public TaskViewWindow()
+        private TaskItem taskItem;
+        private List<TaskControl> _taskControls;
+
+        public TaskViewWindow(List<TaskControl> taskControls)
         {
+            _taskControls = taskControls;
             InitializeComponent();
             stem = new Stem(mainCanvas);
-            stem.Create(5);
-            //mainCanvas.Children.Add(new TaskControl(new Tasks { IsCompleted= false, Name = "課題の反省" }));
-            //var tc = new TaskControl(new Tasks { IsCompleted= true, Name = "課題の反省2" });
-            //Canvas.SetLeft(tc, 100);
-            //Canvas.SetTop(tc, 200);
-            //mainCanvas.Children.Add(tc);
+            stem.Create(_taskControls.Count);
+            taskItem = new TaskItem(mainCanvas, stem.points, _taskControls);
+            taskItem.Create();
         }
     }
 }

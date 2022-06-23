@@ -25,8 +25,6 @@ namespace POMODORO_Timer
         {
             InitializeComponent();
             stepManager = new StepManager(this);
-            TaskViewWindow window = new TaskViewWindow();
-            window.Show();
         }
 
         private void DragMove(object sender, MouseButtonEventArgs e)
