@@ -64,6 +64,7 @@
     <Compile Include="Step.cs" />
     <Compile Include="StepEnum.cs" />
     <Compile Include="StepManager.cs" />
+    <Compile Include="TaskFileAccessManager.cs" />
     <Compile Include="Tasks.cs" />
     <Compile Include="TimerManager.cs" />
     <Page Include="MainWindow.xaml">
