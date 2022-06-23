@@ -9,13 +9,12 @@ namespace POMODORO_Timer
 {
     public class TaskFileAccessManager : FileAccessManager
     {
-        private string Path = System.IO.Path.Combine(Environment.CurrentDirectory, "Repository", "Task", "task.txt");
         public string ErrorMsg = "";
         public bool Load(out string contents)
         {
             try
             {
-                using (StreamReader sr = new StreamReader(Path, Encoding.UTF8))
+                using (StreamReader sr = new StreamReader(Settings.Path, Encoding.UTF8))
                 {
                     contents = sr.ReadToEnd();
                 }
@@ -33,7 +32,7 @@ namespace POMODORO_Timer
         {
             try
             {
-                File.WriteAllText(Path, contents, Encoding.UTF8);
+                File.WriteAllText(Settings.Path, contents, Encoding.UTF8);
             }
             catch (Exception ex)
             {
