@@ -63,6 +63,7 @@
     <Compile Include="FileOperationManager.cs" />
     <Compile Include="NotifyChanged.cs" />
     <Compile Include="Settings.cs" />
+    <Compile Include="Stem.cs" />
     <Compile Include="Step.cs" />
     <Compile Include="StepEnum.cs" />
     <Compile Include="StepManager.cs" />
@@ -72,6 +73,9 @@
     <Compile Include="TaskFileAccessManager.cs" />
     <Compile Include="TaskFileOperationManager.cs" />
     <Compile Include="Tasks.cs" />
+    <Compile Include="TaskViewWindow.xaml.cs">
+      <DependentUpon>TaskViewWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TimerManager.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -86,6 +90,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="TaskControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TaskViewWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

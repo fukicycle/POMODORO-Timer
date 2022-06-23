@@ -10,21 +10,31 @@
              FontSize="14"
              Width="130"
              d:DesignHeight="130" d:DesignWidth="130">
-    <Border CornerRadius="75" Background="{StaticResource Primary500}" Padding="20">
+    <Border CornerRadius="75" Padding="20">
+        <Border.Style>
+            <Style TargetType="Border">
+                <Setter Property="Background" Value="{StaticResource Primary500}"/>
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding IsCompleted,TargetNullValue=False}" Value="True">
+                        <Setter Property="Background" Value="{StaticResource Primary200}"/>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </Border.Style>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
-            <TextBlock VerticalAlignment="Bottom" Text="{Binding Name}" TextAlignment="Center" TextWrapping="Wrap" Foreground="{StaticResource Primary50}" TextTrimming="CharacterEllipsis" />
-            <Button Grid.Row="1" FontFamily="Segoe MDL2 Assets" Click="SwitchButtonOnClick">
+            <TextBlock VerticalAlignment="Center" Text="{Binding Name}" TextAlignment="Center" TextWrapping="Wrap" Foreground="{StaticResource Primary50}" TextTrimming="CharacterEllipsis" />
+            <Button Grid.Row="1" FontFamily="Segoe MDL2 Assets" Click="SwitchButtonOnClick" Width="30" Height="30">
                 <Button.Style>
                     <Style TargetType="Button" BasedOn="{StaticResource FlatButtonStyle}">
                         <Setter Property="Content" Value="&#xE73E;"/>
                         <Style.Triggers>
-                            <Trigger Property="{Binding IsCompleted,TargetNullValue=False}" Value="True">
+                            <DataTrigger Binding="{Binding IsCompleted,TargetNullValue=False}" Value="True">
                                 <Setter Property="Content" Value="&#xE7A7;"/>
-                            </Trigger>
+                            </DataTrigger>
                         </Style.Triggers>
                     </Style>
                 </Button.Style>

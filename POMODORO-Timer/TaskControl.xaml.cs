@@ -24,13 +24,14 @@ namespace POMODORO_Timer
         public TaskControl(Tasks tasks)
         {
             _tasks = tasks;
+            DataContext = _tasks;
             InitializeComponent();
-            DataContext = tasks;
         }
 
         private void SwitchButtonOnClick(object sender, RoutedEventArgs e)
         {
             _tasks.IsCompleted = !_tasks.IsCompleted;
+            DataContext = _tasks;
         }
     }
 }
