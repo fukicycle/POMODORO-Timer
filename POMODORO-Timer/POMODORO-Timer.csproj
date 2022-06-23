@@ -59,6 +59,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="FileAccessManager.cs" />
     <Compile Include="NotifyChanged.cs" />
     <Compile Include="Step.cs" />
     <Compile Include="StepEnum.cs" />
