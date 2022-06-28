@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
+using WMPLib;
 
 namespace POMODORO_Timer
 {
@@ -25,7 +26,7 @@ namespace POMODORO_Timer
 
         public void StartPomodoro()
         {
-            if(timerManager.Start())
+            if (timerManager.Start())
                 _window.stepTextBlock.Text = typeof(StepEnum).GetEnumName(currentStep);
         }
 
@@ -180,6 +181,9 @@ namespace POMODORO_Timer
         public void Finished(StepEnum stepEnum)
         {
             _window.Dispatcher.Invoke(() => Next());
+            WindowsMediaPlayer windowsMediaPlayer = new WindowsMediaPlayer();
+            windowsMediaPlayer.URL = @"alarm.mp3";
+            windowsMediaPlayer.controls.play();
             timerManager.Start();
         }
     }
