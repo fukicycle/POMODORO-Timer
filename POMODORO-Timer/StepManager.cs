@@ -1,5 +1,4 @@
-﻿using NAudio.Wave;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,9 +7,8 @@ using System.Timers;
 
 namespace POMODORO_Timer
 {
-    public class StepManager : NotifyChanged, IDisposable
+    public class StepManager : NotifyChanged
     {
-        private WaveOut player = new WaveOut();
         private TimerManager timerManager;
         private StepEnum prevStep = StepEnum.L_BREAK;
         private StepEnum currentStep = StepEnum.FIRST;
@@ -182,15 +180,7 @@ namespace POMODORO_Timer
         public void Finished(StepEnum stepEnum)
         {
             _window.Dispatcher.Invoke(() => Next());
-            Mp3FileReader mp3FileReader = new Mp3FileReader(@"alarm.mp3");
-            player.Init(mp3FileReader);
-            player.Play();
             timerManager.Start();
-        }
-
-        public void Dispose()
-        {
-            player.Dispose();
         }
     }
 }
